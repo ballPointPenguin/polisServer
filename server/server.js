@@ -14277,7 +14277,9 @@ CREATE TABLE slack_user_invites (
   }
 
   function proxy(req, res) {
+    console.log('proxy');
     let hostname = buildStaticHostname(req, res);
+    console.log('hostname', hostname);
     if (!hostname) {
 
       let host = req.headers.host || "";
@@ -14308,6 +14310,7 @@ CREATE TABLE slack_user_invites (
 
 
     let port = process.env.STATIC_FILES_PORT;
+    console.log('port', port);
     // set the host header too, since S3 will look at that (or the routing proxy will patch up the request.. not sure which)
     req.headers.host = hostname;
     routingProxy.proxyRequest(req, res, {
@@ -14385,23 +14388,20 @@ CREATE TABLE slack_user_invites (
 
     return function(req, res) {
       let hostname = buildStaticHostname(req, res);
+      console.log('hostname', hostname);
       if (!hostname) {
         fail(res, 500, "polis_err_file_fetcher_serving_to_domain");
         console.error(req.headers.host);
         console.error(req.path);
         return;
       }
-      let url;
-      if (devMode) {
-        url = "http://" + hostname + ":" + port + path;
-      } else {
-        // pol.is.s3-website-us-east-1.amazonaws.com
-        // preprod.pol.is.s3-website-us-east-1.amazonaws.com
+      // pol.is.s3-website-us-east-1.amazonaws.com
+      // preprod.pol.is.s3-website-us-east-1.amazonaws.com
 
-        // TODO https - buckets would need to be renamed to have dashes instead of dots.
-        // http://stackoverflow.com/questions/3048236/amazon-s3-https-ssl-is-it-possible
-        url = "http://" + hostname + path;
-      }
+      // TODO https - buckets would need to be renamed to have dashes instead of dots.
+      // http://stackoverflow.com/questions/3048236/amazon-s3-https-ssl-is-it-possible
+      //url = "http://" + hostname + path;
+      let url = "http://" + hostname + ":" + port + path;
       winston.log("info", "fetch file from " + url);
       let x = request(url);
       req.pipe(x);
@@ -14668,7 +14668,9 @@ CREATE TABLE slack_user_invites (
 
 
   function handle_GET_localFile_dev_only(req, res) {
+    console.log('handle_GET_localfile_dev_only');
     let filename = String(req.path).split("/");
+    console.log('filename', filename);
     filename.shift();
     filename.shift();
     filename = filename.join('/');
