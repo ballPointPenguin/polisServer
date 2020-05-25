@@ -3507,6 +3507,10 @@ function initializePolisHelpers() {
 
   function getServerNameWithProtocol(req) {
     let server = "https://pol.is";
+
+    if (domainOverride) {
+      server = req.protocol + "://" + domainOverride;
+    }
     if (devMode) {
       // usually localhost:5000
       server = "http://" + req.headers.host;
@@ -7977,6 +7981,9 @@ Email verified! You can close this tab or hit the back button.
 
   function createModerationUrl(req, zinvite) {
     let server = devMode ? "http://localhost:5000" : "https://pol.is";
+    if (domainOverride) {
+      server = req.protocol + "://" + domainOverride;
+    }
 
     if (req.headers.host.includes("preprod.pol.is")) {
       server = "https://preprod.pol.is";
