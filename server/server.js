@@ -2507,7 +2507,7 @@ function initializePolisHelpers() {
 
 
   function hasWhitelistMatches(host) {
-
+    console.log('hasWhitelistMatches', host);
     let hostWithoutProtocol = host;
     if (host.startsWith("http://")) {
       hostWithoutProtocol = host.slice(7);
@@ -2533,6 +2533,7 @@ function initializePolisHelpers() {
 
 
   function addCorsHeader(req, res, next) {
+    console.log('addCorsHeader');
 
     let host = "";
     if (domainOverride) {
@@ -14324,6 +14325,7 @@ CREATE TABLE slack_user_invites (
     } else {
       let origin = req.headers.host;
       if (!whitelistedBuckets[origin]) {
+        console.log('hasWhiteListMatches?', hasWhitelistMatches(origin));
         if (hasWhitelistMatches(origin)) {
           // Use the prod bucket for non pol.is domains
           return whitelistedBuckets["pol.is"] + "." + process.env.STATIC_FILES_HOST;
