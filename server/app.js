@@ -233,9 +233,10 @@ helpersInitialized.then(function(o) {
   ////////////////////////////////////////////
 
   app.use(function(req, res, next) {
+    console.log('app.use');
     console.log("before");
-    console.log(req.body);
-    console.log(req.headers);
+    console.log('req.body', req.body);
+    console.log('req.headers', req.headers);
     next();
   });
 

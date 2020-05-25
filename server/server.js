@@ -500,6 +500,7 @@ const errorNotifications = (function() {
   let errors = [];
 
   function sendAll() {
+    console.log('sendAll');
     if (errors.length === 0) {
       return;
     }
@@ -2131,6 +2132,7 @@ function initializePolisHelpers() {
   } // End votesGet
 
   function writeDefaultHead(req, res, next) {
+    console.log('writeDefaultHead');
     res.set({
       'Content-Type': 'application/json',
       'Cache-Control': 'no-cache',
@@ -2142,6 +2144,7 @@ function initializePolisHelpers() {
   }
 
   function redirectIfNotHttps(req, res, next) {
+    console.log('redirectIfNotHttps');
 
     let exempt = devMode;
 
@@ -2163,6 +2166,7 @@ function initializePolisHelpers() {
   }
 
   function redirectIfWrongDomain(req, res, next) {
+    console.log('redirectIfWrongDomain');
     // let reServiceHostname = new RegExp(process.env.SERVICE_HOSTNAME);
     if (
       // reServiceHostname.test(req.headers.host) || // needed for heroku integrations (like slack?)
@@ -2177,6 +2181,7 @@ function initializePolisHelpers() {
   }
 
   function redirectIfApiDomain(req, res, next) {
+    console.log('redirectIfApiDomain');
     if (/api.pol.is/.test(req.headers.host)) {
       if (req.url === "/" || req.url === "") {
         res.writeHead(302, {
@@ -3506,6 +3511,7 @@ function initializePolisHelpers() {
 
 
   function getServerNameWithProtocol(req) {
+    console.log('getServerNameWithProtocol');
     let server = "https://pol.is";
 
     if (domainOverride) {
@@ -4482,6 +4488,7 @@ Feel free to reply to this email if you need help.`;
   }
 
   function addParticipantAndMetadata(zid, uid, req, permanent_cookie) {
+    console.log('addParticipantAndMetadata');
     let info = {};
     let parent_url = req.cookies[COOKIES.PARENT_URL] || req.p.parent_url;
     let referer = req.cookies[COOKIES.PARENT_REFERRER] || req.headers["referer"] || req.headers["referrer"];
