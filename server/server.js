@@ -2145,6 +2145,7 @@ function initializePolisHelpers() {
 
   function redirectIfNotHttps(req, res, next) {
     console.log('redirectIfNotHttps');
+    console.log('req', req);
 
     let exempt = devMode;
 
@@ -2153,6 +2154,7 @@ function initializePolisHelpers() {
     // exempt = exempt || /MSIE/.test(req.headers['user-agent']); // TODO test IE11
 
     if (exempt) {
+      console.log('exempt; return next');
       return next();
     }
 
@@ -2160,8 +2162,10 @@ function initializePolisHelpers() {
       res.writeHead(302, {
         Location: "https://" + req.headers.host + req.url,
       });
+      console.log('302: forward');
       return res.end();
     }
+    console.log('return next');
     return next();
   }
 
