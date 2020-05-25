@@ -14645,6 +14645,7 @@ CREATE TABLE slack_user_invites (
 
 
   let handle_GET_conditionalIndexFetcher = (function() {
+    console.log('handle_GET_conditionalIndexFetcher');
     return function(req, res) {
       if (hasAuthToken(req)) {
         // user is signed in, serve the app
