@@ -14381,6 +14381,7 @@ CREATE TABLE slack_user_invites (
   };
 
   function makeFileFetcher(hostname, port, path, headers, preloadData) {
+    console.log('makeFileFetcher', hostname, port, path);
 
     return function(req, res) {
       let hostname = buildStaticHostname(req, res);
@@ -14459,6 +14460,7 @@ CREATE TABLE slack_user_invites (
   let hostname = process.env.STATIC_FILES_HOST;
   let portForParticipationFiles = process.env.STATIC_FILES_PORT;
   let portForAdminFiles = process.env.STATIC_FILES_ADMINDASH_PORT;
+  console.log('hostname', hostname, 'portForParticipationFiles', portForParticipationFiles, 'portForAdminFiles', portForAdminFiles);
 
 
   let fetchUnsupportedBrowserPage = makeFileFetcher(hostname, portForParticipationFiles, "/unsupportedBrowser.html", {

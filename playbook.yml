@@ -164,8 +164,6 @@
         tag: dev
         build:
           path: "{{ workdir }}/file-server"
-          args:
-            GIT_HASH: "{{ git_hash }}"
 
     - name: run file-server
       docker_container:
