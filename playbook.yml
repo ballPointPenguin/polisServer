@@ -171,7 +171,7 @@
       docker_container:
         image: polisdemo/polis-file-server:dev
         name: polis-file-server
-        recreate: yes
+        #recreate: yes
         restart_policy: always
         # volumes_from:
         #   - polis-client-build
@@ -182,7 +182,7 @@
     # - file-server
     - name: build polis api server image
       docker_image:
-        #force_source: yes
+        force_source: yes
         name: polisdemo/polis-server
         source: build
         tag: dev
