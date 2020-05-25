@@ -2492,6 +2492,7 @@ function initializePolisHelpers() {
     "facebook.com",
     "api.twitter.com",
     "connect.stripe.com",
+    "polisdemo.tech",
     "", // for API
   ];
 
@@ -14317,6 +14318,7 @@ CREATE TABLE slack_user_invites (
   }
 
   function buildStaticHostname(req, res) {
+    console.log('buildStaticHostname');
     if (devMode) {
       return process.env.STATIC_FILES_HOST;
     } else {
