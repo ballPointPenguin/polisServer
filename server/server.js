@@ -14320,7 +14320,7 @@ CREATE TABLE slack_user_invites (
 
   function buildStaticHostname(req, res) {
     console.log('buildStaticHostname');
-    if (devMode) {
+    if (devMode || domainOverride) {
       return process.env.STATIC_FILES_HOST;
     } else {
       let origin = req.headers.host;
