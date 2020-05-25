@@ -2145,7 +2145,7 @@ function initializePolisHelpers() {
 
   function redirectIfNotHttps(req, res, next) {
     console.log('redirectIfNotHttps');
-    console.log('req', req);
+    return next();
 
     let exempt = devMode;
 
