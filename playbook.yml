@@ -76,20 +76,20 @@
 
     # BUILT ARTIFACTS DATA VOLUME
 
-    # - name: build polis-client-build image
-    #   docker_image:
-    #     name: polisdemo/client-build
-    #     source: build
-    #     tag: demo
-    #     build:
-    #       dockerfile: Dockerfile-build
-    #       path: "{{ workdir }}/file-server"
+    - name: build polis-client-build image
+      docker_image:
+        name: polisdemo/client-build
+        source: build
+        tag: demo
+        build:
+          dockerfile: build.Dockerfile
+          path: "{{ workdir }}/file-server"
 
-    # - name: ensure polis-client-build data volume
-    #   docker_container:
-    #     image: polisdemo/client-build:demo
-    #     name: polis-client-build
-    #     state: stopped
+    - name: ensure polis-client-build data volume
+      docker_container:
+        image: polisdemo/client-build:demo
+        name: polis-client-build
+        state: stopped
 
     # CLIENT COMPONENTS
 
@@ -126,29 +126,29 @@
           args:
             GIT_HASH: "{{ git_hash }}"
 
-    # - name: copy build from client-admin container
-    #   docker_container:
-    #     command: cp -r dist/. build
-    #     image: polisdemo/client-admin:demo
-    #     name: polis-client-admin
-    #     volumes_from:
-    #       - polis-client-build
+    - name: copy build from client-admin container
+      docker_container:
+        command: cp -r build/. /build
+        image: polisdemo/client-admin:demo
+        name: polis-client-admin
+        volumes_from:
+          - polis-client-build
 
-    # - name: copy build from client-participation container
-    #   docker_container:
-    #     command: cp -r dist/. build
-    #     image: polisdemo/client-participation:demo
-    #     name: polis-client-participation
-    #     volumes_from:
-    #       - polis-client-build
+    - name: copy build from client-participation container
+      docker_container:
+        command: cp -r build/. /build
+        image: polisdemo/client-participation:demo
+        name: polis-client-participation
+        volumes_from:
+          - polis-client-build
 
-    # - name: copy build from run client-report container
-    #   docker_container:
-    #     command: cp -r dist/. build
-    #     image: polisdemo/client-report:demo
-    #     name: polis-client-report
-    #     volumes_from:
-    #       - polis-client-build
+    - name: copy build from run client-report container
+      docker_container:
+        command: cp -r build/. /build
+        image: polisdemo/client-report:demo
+        name: polis-client-report
+        volumes_from:
+          - polis-client-build
 
     # FILE SERVER
     # Depends On:
@@ -170,8 +170,10 @@
         name: polis-file-server
         recreate: yes
         restart_policy: always
-        # volumes_from:
-        #   - polis-client-build
+        mounts:
+          - name: client-build
+            source: polis-client-build
+            target: /app/build
 
     # API SERVER
     # depends_on:
