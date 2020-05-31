@@ -1,5 +1,5 @@
 # Requires a very specific version due to package bugs and version compatibility
-FROM node:6.10.3-alpine as client-admin
+FROM node:6.10.3-alpine
 
 ARG GIT_HASH
 

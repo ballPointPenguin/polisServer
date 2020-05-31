@@ -95,7 +95,7 @@
 
     - name: build client-admin image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-admin
         source: build
         tag: demo
@@ -106,7 +106,7 @@
 
     - name: build client-participation image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-participation
         source: build
         tag: demo
@@ -117,7 +117,7 @@
 
     - name: build client-report image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-report
         source: build
         tag: demo
