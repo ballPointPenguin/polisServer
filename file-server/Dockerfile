@@ -9,6 +9,7 @@ RUN npm ci
 COPY . .
 COPY fs_config.template.json fs_config.json
 
+RUN mkdir /app/build
 COPY --from=polisdemo/client-report:dev /app/build/ ./build/
 COPY --from=polisdemo/client-admin:dev /app/build/ ./build/
 COPY --from=polisdemo/client-participation:dev /app/build/ ./build/
