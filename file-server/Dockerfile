@@ -10,9 +10,9 @@ COPY . .
 COPY fs_config.template.json fs_config.json
 
 RUN mkdir /app/build
-COPY --from=polisdemo/client-report:dev /app/build/ ./build/
-COPY --from=polisdemo/client-admin:dev /app/build/ ./build/
-COPY --from=polisdemo/client-participation:dev /app/build/ ./build/
+COPY --from=client-report /app/build/ /app/build/
+COPY --from=client-admin /app/build/ /app/build/
+COPY --from=client-participation /app/build/ /app/build/
 
 EXPOSE 8080
 

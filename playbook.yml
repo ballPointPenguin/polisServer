@@ -56,19 +56,18 @@
         name: polis-db-data
         state: stopped
 
-    # TODO: push to docker hub or other repo
     - name: build polis postgres image
       docker_image:
-        name: polisdemo/polis-postgres
+        name: polisdemo/postgres
         source: build
-        tag: dev
+        tag: demo
         build:
           dockerfile: Dockerfile-db
           path: "{{ workdir }}/server"
 
     - name: run polis postgres
       docker_container:
-        image: polisdemo/polis-postgres:dev
+        image: polisdemo/postgres:demo
         name: polis-postgres
         restart_policy: always
         env_file: "{{ workdir }}/.env"
@@ -79,16 +78,16 @@
 
     # - name: build polis-client-build image
     #   docker_image:
-    #     name: polisdemo/polis-client-build
+    #     name: polisdemo/client-build
     #     source: build
-    #     tag: dev
+    #     tag: demo
     #     build:
     #       dockerfile: Dockerfile-build
     #       path: "{{ workdir }}/file-server"
 
     # - name: ensure polis-client-build data volume
     #   docker_container:
-    #     image: polisdemo/polis-client-build:dev
+    #     image: polisdemo/client-build:demo
     #     name: polis-client-build
     #     state: stopped
 
@@ -99,7 +98,7 @@
         force_source: yes
         name: polisdemo/client-admin
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/client-admin"
           args:
@@ -107,10 +106,10 @@
 
     - name: build client-participation image
       docker_image:
-        #force_source: yes
+        force_source: yes
         name: polisdemo/client-participation
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/client-participation"
           args:
@@ -118,10 +117,10 @@
 
     - name: build client-report image
       docker_image:
-        #force_source: yes
+        force_source: yes
         name: polisdemo/client-report
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/client-report"
           args:
@@ -130,7 +129,7 @@
     # - name: copy build from client-admin container
     #   docker_container:
     #     command: cp -r dist/. build
-    #     image: polisdemo/client-admin:dev
+    #     image: polisdemo/client-admin:demo
     #     name: polis-client-admin
     #     volumes_from:
     #       - polis-client-build
@@ -138,7 +137,7 @@
     # - name: copy build from client-participation container
     #   docker_container:
     #     command: cp -r dist/. build
-    #     image: polisdemo/client-participation:dev
+    #     image: polisdemo/client-participation:demo
     #     name: polis-client-participation
     #     volumes_from:
     #       - polis-client-build
@@ -146,7 +145,7 @@
     # - name: copy build from run client-report container
     #   docker_container:
     #     command: cp -r dist/. build
-    #     image: polisdemo/client-report:dev
+    #     image: polisdemo/client-report:demo
     #     name: polis-client-report
     #     volumes_from:
     #       - polis-client-build
@@ -159,15 +158,15 @@
     - name: build file-server image
       docker_image:
         force_source: yes
-        name: polisdemo/polis-file-server
+        name: polisdemo/file-server
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/file-server"
 
     - name: run file-server
       docker_container:
-        image: polisdemo/polis-file-server:dev
+        image: polisdemo/file-server:demo
         name: polis-file-server
         recreate: yes
         restart_policy: always
@@ -181,16 +180,16 @@
     - name: build polis api server image
       docker_image:
         force_source: yes
-        name: polisdemo/polis-server
+        name: polisdemo/server
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/server"
 
     - name: run polis api server
       docker_container:
         env_file: "{{ workdir }}/.env"
-        image: polisdemo/polis-server:dev
+        image: polisdemo/server:demo
         name: polis-server
         recreate: yes
         restart_policy: always
@@ -209,17 +208,17 @@
     # - postgres
     - name: build polis math image
       docker_image:
-        #force_source: yes
-        name: polisdemo/polis-math
+        force_source: yes
+        name: polisdemo/math
         source: build
-        tag: dev
+        tag: demo
         build:
           path: "{{ workdir }}/math"
 
     - name: run polis math
       docker_container:
         env_file: "{{ workdir }}/.env"
-        image: polisdemo/polis-math:dev
+        image: polisdemo/math:demo
         name: polis-math
         restart_policy: always
         env:
