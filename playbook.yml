@@ -64,6 +64,7 @@
         build:
           dockerfile: Dockerfile-db
           path: "{{ workdir }}/server"
+          pull: no
 
     - name: run polis postgres
       docker_container:
@@ -84,13 +85,14 @@
     #     build:
     #       dockerfile: build.Dockerfile
     #       path: "{{ workdir }}/file-server"
+    #       pull: no
 
-    - name: ensure polis-client-build data volume
-      docker_container:
-        name: polis-client-build
-        image: busybox
-        volumes:
-          - /build
+    # - name: ensure polis-client-build data volume
+    #   docker_container:
+    #     name: polis-client-build
+    #     image: busybox
+    #     volumes:
+    #       - /build
         # image: polisdemo/client-build:demo
         # name: polis-client-build
         # state: stopped
@@ -105,6 +107,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/client-admin"
+          pull: no
           args:
             GIT_HASH: "{{ git_hash }}"
 
@@ -116,6 +119,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/client-participation"
+          pull: no
           args:
             GIT_HASH: "{{ git_hash }}"
 
@@ -127,6 +131,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/client-report"
+          pull: no
           args:
             GIT_HASH: "{{ git_hash }}"
 
@@ -135,24 +140,24 @@
         command: cp -r build/. /build
         image: polisdemo/client-admin:demo
         name: polis-client-admin
-        volumes_from:
-          - polis-client-build
+        # volumes_from:
+        #   - polis-client-build
 
     - name: copy build from client-participation container
       docker_container:
         command: cp -r build/. /build
         image: polisdemo/client-participation:demo
         name: polis-client-participation
-        volumes_from:
-          - polis-client-build
+        # volumes_from:
+        #   - polis-client-build
 
     - name: copy build from run client-report container
       docker_container:
         command: cp -r build/. /build
         image: polisdemo/client-report:demo
         name: polis-client-report
-        volumes_from:
-          - polis-client-build
+        # volumes_from:
+        #   - polis-client-build
 
     # FILE SERVER
     # Depends On:
@@ -167,6 +172,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/file-server"
+          pull: no
 
     - name: run file-server
       docker_container:
@@ -174,9 +180,9 @@
         name: polis-file-server
         recreate: yes
         restart_policy: always
-        mounts:
-          - source: polis-client-build
-            target: /app/build
+        # mounts:
+        #   - source: polis-client-build
+        #     target: /app/build
 
     # API SERVER
     # depends_on:
@@ -190,6 +196,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/server"
+          pull: no
 
     - name: run polis api server
       docker_container:
@@ -219,6 +226,7 @@
         tag: demo
         build:
           path: "{{ workdir }}/math"
+          pull: no
 
     - name: run polis math
       docker_container:
