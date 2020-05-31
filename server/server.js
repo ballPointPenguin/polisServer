@@ -14674,6 +14674,8 @@ CREATE TABLE slack_user_invites (
     filename.shift();
     filename.shift();
     filename = filename.join('/');
+    console.log('filename', filename);
+
     if (!devMode) {
       // pretend this route doesn't exist.
       return proxy(req, res);

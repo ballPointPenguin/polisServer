@@ -1,4 +1,3 @@
-
 module.exports = {
 
   domainWhitelist: [
@@ -6,6 +5,7 @@ module.exports = {
     "^192\\.168\\.1\\.140$",
     "^pol\\.is",
     ".+\\.pol\\.is$",
+    ".+\\.polisdemo\\.tech$",
     "^xip\\.io$",
     ".+\\.xip\\.io$",
   ],
@@ -15,8 +15,8 @@ module.exports = {
 
   FB_APP_ID: '661042417336977',
 
-  //SERVICE_URL: 'http://localhost:5000',
-  SERVICE_URL: 'https://preprod.pol.is',
+  SERVICE_URL: 'http://localhost:5000',
+  //SERVICE_URL: 'https://preprod.pol.is',
 
   UPLOADER: 'local', // alt: s3, scp
 
