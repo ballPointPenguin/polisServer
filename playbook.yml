@@ -76,20 +76,24 @@
 
     # BUILT ARTIFACTS DATA VOLUME
 
-    - name: build polis-client-build image
-      docker_image:
-        name: polisdemo/client-build
-        source: build
-        tag: demo
-        build:
-          dockerfile: build.Dockerfile
-          path: "{{ workdir }}/file-server"
+    # - name: build polis-client-build image
+    #   docker_image:
+    #     name: polisdemo/client-build
+    #     source: build
+    #     tag: demo
+    #     build:
+    #       dockerfile: build.Dockerfile
+    #       path: "{{ workdir }}/file-server"
 
     - name: ensure polis-client-build data volume
       docker_container:
-        image: polisdemo/client-build:demo
         name: polis-client-build
-        state: stopped
+        image: busybox
+        volumes:
+          - /build
+        # image: polisdemo/client-build:demo
+        # name: polis-client-build
+        # state: stopped
 
     # CLIENT COMPONENTS
 
@@ -171,7 +175,7 @@
         recreate: yes
         restart_policy: always
         mounts:
-          - source: polis-client-build
+          - source: polis-client-build:/build
             target: /app/build
 
     # API SERVER
@@ -192,7 +196,7 @@
         env_file: "{{ workdir }}/.env"
         image: polisdemo/server:demo
         name: polis-server
-        recreate: yes
+        # recreate: yes
         restart_policy: always
         env:
           PORT: "5000"
