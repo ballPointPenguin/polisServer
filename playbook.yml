@@ -175,7 +175,7 @@
         recreate: yes
         restart_policy: always
         mounts:
-          - source: polis-client-build:/build
+          - source: polis-client-build
             target: /app/build
 
     # API SERVER
