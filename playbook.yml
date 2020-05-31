@@ -101,7 +101,7 @@
 
     - name: build client-admin image
       docker_image:
-        # force_source: yes
+        force_source: yes
         name: polisdemo/client-admin
         source: build
         tag: demo
@@ -113,7 +113,7 @@
 
     - name: build client-participation image
       docker_image:
-        # force_source: yes
+        force_source: yes
         name: polisdemo/client-participation
         source: build
         tag: demo
@@ -135,27 +135,27 @@
           args:
             GIT_HASH: "{{ git_hash }}"
 
-    - name: copy build from client-admin container
-      docker_container:
-        command: cp -r build/. /build
-        image: polisdemo/client-admin:demo
-        name: polis-client-admin
+    # - name: copy build from client-admin container
+    #   docker_container:
+    #     command: cp -r build/. /build
+    #     image: polisdemo/client-admin:demo
+    #     name: polis-client-admin
         # volumes_from:
         #   - polis-client-build
 
-    - name: copy build from client-participation container
-      docker_container:
-        command: cp -r build/. /build
-        image: polisdemo/client-participation:demo
-        name: polis-client-participation
+    # - name: copy build from client-participation container
+    #   docker_container:
+    #     command: cp -r build/. /build
+    #     image: polisdemo/client-participation:demo
+    #     name: polis-client-participation
         # volumes_from:
         #   - polis-client-build
 
-    - name: copy build from run client-report container
-      docker_container:
-        command: cp -r build/. /build
-        image: polisdemo/client-report:demo
-        name: polis-client-report
+    # - name: copy build from run client-report container
+    #   docker_container:
+    #     command: cp -r build/. /build
+    #     image: polisdemo/client-report:demo
+    #     name: polis-client-report
         # volumes_from:
         #   - polis-client-build
 
