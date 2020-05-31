@@ -101,7 +101,7 @@
 
     - name: build client-admin image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-admin
         source: build
         tag: demo
@@ -113,7 +113,7 @@
 
     - name: build client-participation image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-participation
         source: build
         tag: demo
@@ -166,7 +166,7 @@
     # - polisdemo/client-report
     - name: build file-server image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/file-server
         source: build
         tag: demo
@@ -190,7 +190,7 @@
     # - file-server
     - name: build polis api server image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/server
         source: build
         tag: demo
@@ -203,7 +203,7 @@
         env_file: "{{ workdir }}/.env"
         image: polisdemo/server:demo
         name: polis-server
-        # recreate: yes
+        recreate: yes
         restart_policy: always
         env:
           PORT: "5000"
@@ -220,7 +220,7 @@
     # - postgres
     - name: build polis math image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/math
         source: build
         tag: demo
