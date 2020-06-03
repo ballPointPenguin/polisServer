@@ -93,9 +93,9 @@
     #     image: busybox
     #     volumes:
     #       - /build
-        # image: polisdemo/client-build:demo
-        # name: polis-client-build
-        # state: stopped
+    # image: polisdemo/client-build:demo
+    # name: polis-client-build
+    # state: stopped
 
     # CLIENT COMPONENTS
 
@@ -140,24 +140,24 @@
     #     command: cp -r build/. /build
     #     image: polisdemo/client-admin:demo
     #     name: polis-client-admin
-        # volumes_from:
-        #   - polis-client-build
+    # volumes_from:
+    #   - polis-client-build
 
     # - name: copy build from client-participation container
     #   docker_container:
     #     command: cp -r build/. /build
     #     image: polisdemo/client-participation:demo
     #     name: polis-client-participation
-        # volumes_from:
-        #   - polis-client-build
+    # volumes_from:
+    #   - polis-client-build
 
     # - name: copy build from run client-report container
     #   docker_container:
     #     command: cp -r build/. /build
     #     image: polisdemo/client-report:demo
     #     name: polis-client-report
-        # volumes_from:
-        #   - polis-client-build
+    # volumes_from:
+    #   - polis-client-build
 
     # FILE SERVER
     # Depends On:
@@ -178,7 +178,7 @@
       docker_container:
         image: polisdemo/file-server:demo
         name: polis-file-server
-        recreate: yes
+        # recreate: yes
         restart_policy: always
         # mounts:
         #   - source: polis-client-build
@@ -203,7 +203,7 @@
         env_file: "{{ workdir }}/.env"
         image: polisdemo/server:demo
         name: polis-server
-        recreate: yes
+        # recreate: yes
         restart_policy: always
         env:
           PORT: "5000"
@@ -240,27 +240,24 @@
           - "3123"
         links:
           - "polis-postgres:postgres"
-
     # NGINX
     # depends_on:
     # - api server
     #- name: copy nginx.default.conf file to remote folder
-      #copy:
-        #src: file-server/nginx.default.conf
-        #dest: "{{ workdir }}/file-server/"
-
+    #copy:
+    #src: file-server/nginx.default.conf
+    #dest: "{{ workdir }}/file-server/"
     #- name: run nginx proxy
-      #docker_container:
-        #image: nginx
-        #name: polis-nginx-proxy
-        #recreate: yes
-        #restart_policy: always
-        #env:
-          #HSTS: "off"
-          #VIRTUAL_HOST: "polisdemo.tech,www.polisdemo.tech"
-          #LETSENCRYPT_HOST: "polisdemo.tech,www.polisdemo.tech"
-        #links:
-          #- "polis-server:server"
-        #volumes:
-          #- "{{ workdir }}/file-server/nginx.default.conf:/etc/nginx/conf.d/default.conf"
-
+    #docker_container:
+    #image: nginx
+    #name: polis-nginx-proxy
+    #recreate: yes
+    #restart_policy: always
+    #env:
+    #HSTS: "off"
+    #VIRTUAL_HOST: "polisdemo.tech,www.polisdemo.tech"
+    #LETSENCRYPT_HOST: "polisdemo.tech,www.polisdemo.tech"
+    #links:
+    #- "polis-server:server"
+    #volumes:
+    #- "{{ workdir }}/file-server/nginx.default.conf:/etc/nginx/conf.d/default.conf"

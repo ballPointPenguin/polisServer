@@ -18,6 +18,7 @@ for (var i = 0; i < wl.length; i++) {
     break;
   }
 }
+console.log({ urlPrefix })
 
 export default {
   urlPrefix: urlPrefix,
