@@ -93,6 +93,7 @@ gulp.task('index', [
   html = html.replace("<%= usePlans %>", !isTrue(polisConfig.DISABLE_PLANS));
 
   var domainWhitelist = '["' + polisConfig.domainWhitelist.join('","') + '"]';
+  console.log({ domainWhitelist });
   html = html.replace("<%= domainWhitelist %>", domainWhitelist);
 
   // index goes to the root of the dist folder.

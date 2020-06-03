@@ -211,8 +211,8 @@
         env:
           PORT: "5000"
           HSTS: "off"
-          LETSENCRYPT_HOST: "polisdemo.tech"
-          VIRTUAL_HOST: "polisdemo.tech"
+          LETSENCRYPT_HOST: "polisdemo.tech,www.polisdemo.tech"
+          VIRTUAL_HOST: "polisdemo.tech,www.polisdemo.tech"
           VIRTUAL_PORT: "5000"
         links:
           - "polis-file-server:file-server"
