@@ -169,7 +169,7 @@
     # - polisdemo/client-report
     - name: build file-server image
       docker_image:
-        # force_source: yes
+        force_source: yes
         name: polisdemo/file-server
         source: build
         tag: demo
@@ -181,7 +181,7 @@
       docker_container:
         image: polisdemo/file-server:demo
         name: polis-file-server
-        recreate: yes
+        # recreate: yes
         restart_policy: always
         # mounts:
         #   - source: polis-client-build
