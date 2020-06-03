@@ -101,7 +101,7 @@
 
     - name: build client-admin image
       docker_image:
-        force_source: yes
+        # force_source: yes
         name: polisdemo/client-admin
         source: build
         tag: demo
@@ -181,7 +181,7 @@
       docker_container:
         image: polisdemo/file-server:demo
         name: polis-file-server
-        # recreate: yes
+        recreate: yes
         restart_policy: always
         # mounts:
         #   - source: polis-client-build
