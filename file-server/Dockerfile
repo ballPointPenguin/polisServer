@@ -1,5 +1,10 @@
+ARG TAG=dev
+
+FROM polisdemo/client-admin:${TAG}          as admin
+FROM polisdemo/client-participatoin:${TAG}  as participation
+FROM polisdemo/client-report:${TAG}         as report
+
 FROM node:10.20.1-alpine
-ARG TAG="demo"
 
 WORKDIR /app
 
@@ -11,9 +16,9 @@ COPY . .
 COPY fs_config.template.json fs_config.json
 
 RUN mkdir /app/build
-COPY --from=polisdemo/client-report:"$TAG" /app/build/ /app/build/
-COPY --from=polisdemo/client-admin:"$TAG" /app/build/ /app/build/
-COPY --from=polisdemo/client-participation:"$TAG" /app/build/ /app/build/
+COPY --from=admin         /app/build/ /app/build
+COPY --from=participation /app/build/ /app/build
+COPY --from=report        /app/build/ /app/build
 
 EXPOSE 8080
 
