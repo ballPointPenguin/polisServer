@@ -47,7 +47,12 @@ app.put(/^\/api\//, proxy);
 app.post(/^\/api\//, proxy);
 
 app.get(/^\/embed\/?$/, function(req, res) {
-  res.sendFile(path.join(__dirname, 'embed.html'));
+  const html = fs.readFileSync(path.join(__dirname, 'embed.html'), { encoding: 'utf8' });
+
+  html = html.replace("<%= serviceUrl %>", serviceUrl);
+
+  res.set({ 'Content-Type': 'text/html' });
+  res.send(html);
 });
 
 app.get('*', function(req, res) {

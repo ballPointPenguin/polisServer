@@ -104,10 +104,13 @@ gulp.task('index', [
 
 gulp.task('embed', [
 ], function() {
-  var index = fs.readFileSync('embed.html', {encoding: "utf8"});
+  var html = fs.readFileSync('embed.html', {encoding: "utf8"});
   var dest = [destRootBase, "embed.html"].join("/");
+
+  html = html.replace("<%= serviceUrl %>", polisConfig.SERVICE_URL);
+
   // fs.mkdirSync(destRootBase);
-  fs.writeFileSync(dest, index);
+  fs.writeFileSync(dest, html);
 });
 
 gulp.task('embedPreprod', [
