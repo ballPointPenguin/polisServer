@@ -1,4 +1,5 @@
 FROM node:10.20.1-alpine
+ARG tag=dev
 
 WORKDIR /app
 
@@ -10,9 +11,9 @@ COPY . .
 COPY fs_config.template.json fs_config.json
 
 RUN mkdir /app/build
-COPY --from=polisdemo/client-report:demo /app/build/ /app/build/
-COPY --from=polisdemo/client-admin:demo /app/build/ /app/build/
-COPY --from=polisdemo/client-participation:demo /app/build/ /app/build/
+COPY --from=polisdemo/client-report:${TAG} /app/build/ /app/build/
+COPY --from=polisdemo/client-admin:${TAG} /app/build/ /app/build/
+COPY --from=polisdemo/client-participation:${TAG} /app/build/ /app/build/
 
 EXPOSE 8080
 
