@@ -1,4 +1,3 @@
-
 module.exports = {
 
   domainWhitelist: [
@@ -6,6 +5,8 @@ module.exports = {
     "^192\\.168\\.1\\.140$",
     "^pol\\.is",
     ".+\\.pol\\.is$",
+    "^polisdemo\\.tech$",
+    ".+\\.polisdemo\\.tech$",
     "^xip\\.io$",
     ".+\\.xip\\.io$",
   ],
