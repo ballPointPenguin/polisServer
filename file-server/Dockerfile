@@ -1,5 +1,5 @@
 FROM node:10.20.1-alpine
-ARG TAG=dev
+ARG TAG=demo
 
 WORKDIR /app
 
