@@ -9,9 +9,10 @@ RUN npm ci
 COPY . .
 COPY fs_config.template.json fs_config.json
 
-COPY --from=polisdemo/client-report:dev /app/build/ ./build/
-COPY --from=polisdemo/client-admin:dev /app/build/ ./build/
-COPY --from=polisdemo/client-participation:dev /app/build/ ./build/
+RUN mkdir /app/build
+COPY --from=polisdemo/client-report:demo /app/build/ /app/build/
+COPY --from=polisdemo/client-admin:demo /app/build/ /app/build/
+COPY --from=polisdemo/client-participation:demo /app/build/ /app/build/
 
 EXPOSE 8080
 
